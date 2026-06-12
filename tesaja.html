@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayana Resto</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:#f5f0e8;color:#2c1a0e;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:#8b5a2a;border-radius:3px}
+input,select,textarea,button{font-family:'Nunito',sans-serif}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:66px;background:rgba(245,240,232,0.92);backdrop-filter:blur(10px);border-bottom:1.5px solid rgba(58,90,28,0.15)}
+.nav-links{display:flex;gap:40px;font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.nav-links a{color:#6b5744;text-decoration:none;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:#3a5a1c}
+.nav-brand{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#2c1a0e;letter-spacing:2px;cursor:pointer;text-decoration:none}
+.nav-brand span{color:#3a5a1c}
+
+/* ── HERO ── */
+#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:66px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#2c1a0e 0%,#3d2510 30%,#1e3a0a 70%,#2a4212 100%);z-index:0}
+.hero-marquee-wrap{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;z-index:1;opacity:.08}
+.hero-marquee{position:absolute;white-space:nowrap;font-family:'Playfair Display',serif;font-size:120px;font-weight:900;color:#c8a96e;animation:marquee 18s linear infinite;top:10%;letter-spacing:8px}
+.hero-marquee2{top:50%;animation-delay:-9s;animation-duration:22s}
+.hero-marquee3{top:78%;animation-duration:14s;animation-delay:-4s}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.hero-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:40px 20px}
+.hero-badge{background:rgba(200,169,110,.18);border:1.5px solid rgba(200,169,110,.4);color:#c8a96e;font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;padding:7px 20px;border-radius:40px;margin-bottom:24px}
+.hero-leaf{font-size:72px;margin-bottom:16px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4));animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(54px,8vw,110px);font-weight:900;color:#fff;line-height:.95;letter-spacing:-1px;margin-bottom:10px}
+.hero-title em{color:#c8a96e;font-style:italic}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.55);letter-spacing:1px;margin-bottom:40px;text-transform:uppercase;font-weight:600}
+.hero-cta{background:#c8a96e;color:#2c1a0e;border:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;letter-spacing:1px;padding:18px 48px;border-radius:60px;cursor:pointer;transition:all .25s;text-transform:uppercase}
+.hero-cta:hover{background:#e0c080;transform:scale(1.04)}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.3);font-size:12px;letter-spacing:2px;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:6px}
+.hero-scroll span{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent)}
+
+/* ── SECTION BASE ── */
+section{padding:80px 48px}
+.section-label{font-size:11px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:#6b5744;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:900;color:#2c1a0e;margin-bottom:32px;line-height:1.1}
+.section-title em{color:#3a5a1c;font-style:italic}
+
+/* ── MENU SECTION ── */
+#menu{background:#f5f0e8}
+.menu-cats{display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap}
+.cat-btn{padding:10px 24px;border-radius:40px;border:2px solid rgba(58,90,28,.25);background:transparent;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;color:#6b5744}
+.cat-btn.active,.cat-btn:hover{background:#3a5a1c;color:#fff;border-color:#3a5a1c}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.menu-card{background:#2c3d1a;border-radius:20px;overflow:hidden;border:1.5px solid rgba(58,90,28,.3);transition:transform .2s,box-shadow .2s}
+.menu-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(44,26,14,.25)}
+.menu-card-img{height:190px;overflow:hidden;position:relative}
+.menu-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.menu-card:hover .menu-card-img img{transform:scale(1.06)}
+.menu-card-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(30,48,12,.7) 100%)}
+.menu-card-body{padding:16px 18px 18px}
+.menu-card-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;margin-bottom:10px}
+.tag-fav{background:#c8a96e;color:#2c1a0e}
+.tag-spicy{background:#8b2020;color:#fff}
+.tag-popular{background:#4e7c28;color:#fff}
+.menu-card-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:800;margin-bottom:5px;line-height:1.25;color:#fff}
+.menu-card-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;margin-bottom:14px}
+.menu-card-price{font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:#c8a96e}
+
+/* ── ORDER PAGE ── */
+#order-page{display:none;position:fixed;inset:0;z-index:500;background:#f5f0e8;overflow-y:auto}
+#order-page.open{display:block}
+.order-header{background:#2c1a0e;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.order-header-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:#c8a96e;display:flex;align-items:center;gap:10px}
+.close-order-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer}
+.close-order-btn:hover{background:rgba(255,255,255,.2)}
+.order-body{max-width:1000px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+.order-section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:#2c1a0e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid rgba(58,90,28,.15)}
+.order-item-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(44,26,14,.07)}
+.order-item-emoji{width:52px;height:52px;background:linear-gradient(135deg,#f0e8d8,#e8dcc8);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.order-item-info{flex:1}
+.order-item-name{font-size:14px;font-weight:800;color:#2c1a0e;margin-bottom:2px}
+.order-item-price{font-size:13px;color:#6b5744;font-weight:600}
+.qty-ctrl{display:flex;align-items:center;gap:8px}
+.qty-btn{width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(58,90,28,.3);background:transparent;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#3a5a1c;transition:all .15s}
+.qty-btn:hover{background:#3a5a1c;color:#fff;border-color:#3a5a1c}
+.qty-num{min-width:22px;text-align:center;font-size:14px;font-weight:800}
+
+/* ── CART PANEL ── */
+.cart-panel{background:#fff;border-radius:20px;border:1.5px solid rgba(58,90,28,.12);padding:24px;position:sticky;top:90px}
+.cart-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:#2c1a0e;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.cart-empty{text-align:center;padding:28px 0;color:#9a8070;font-size:13px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0e8d8;font-size:13px}
+.cart-item-name{font-weight:700;color:#2c1a0e;flex:1}
+.cart-item-qty{color:#6b5744;margin:0 8px}
+.cart-item-price{font-weight:800;color:#3a5a1c}
+.cart-item-del{width:24px;height:24px;border:none;background:#fce8e8;color:#c0392b;border-radius:50%;font-size:13px;cursor:pointer;margin-left:6px;display:flex;align-items:center;justify-content:center;font-weight:800}
+.cart-divider{border:none;border-top:1.5px solid #f0e8d8;margin:12px 0}
+.cart-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px;color:#6b5744}
+.cart-total-row{display:flex;justify-content:space-between;font-size:17px;font-weight:800;color:#2c1a0e;margin-top:4px}
+.cart-total-row span:last-child{color:#3a5a1c}
+.confirm-btn{width:100%;padding:15px;background:#3a5a1c;color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;margin-top:16px;font-family:'Playfair Display',serif;transition:all .2s}
+.confirm-btn:hover{background:#4e7c28;transform:scale(1.02)}
+.confirm-btn:disabled{background:#aaa;cursor:not-allowed;transform:none}
+
+/* ── PAYMENT MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:600;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;border-radius:24px;padding:36px;width:100%;max-width:440px;margin:20px;animation:popIn .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:#2c1a0e;margin-bottom:6px}
+.modal-sub{font-size:13px;color:#9a8070;margin-bottom:24px}
+.order-summary-box{background:#f5f0e8;border-radius:14px;padding:16px;margin-bottom:20px}
+.sum-row{display:flex;justify-content:space-between;font-size:13px;color:#6b5744;margin-bottom:7px}
+.sum-total{display:flex;justify-content:space-between;font-size:18px;font-weight:800;color:#2c1a0e;padding-top:10px;border-top:1.5px solid rgba(58,90,28,.15)}
+.sum-total span:last-child{color:#3a5a1c}
+.pay-method-label{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#6b5744;margin-bottom:10px}
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.pay-opt{border:2px solid rgba(58,90,28,.2);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s}
+.pay-opt:hover,.pay-opt.selected{border-color:#3a5a1c;background:#eef6e4}
+.pay-opt-icon{font-size:32px;margin-bottom:6px}
+.pay-opt-name{font-size:13px;font-weight:800;color:#2c1a0e}
+.pay-opt-desc{font-size:11px;color:#9a8070;margin-top:2px}
+.pay-btn{width:100%;padding:15px;background:#3a5a1c;color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Playfair Display',serif;transition:all .2s}
+.pay-btn:hover{background:#4e7c28}
+.pay-btn:disabled{background:#bbb;cursor:not-allowed}
+.cancel-pay-btn{width:100%;padding:11px;background:transparent;color:#9a8070;border:1.5px solid rgba(0,0,0,.1);border-radius:14px;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+
+/* ── SUCCESS MODAL ── */
+.success-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:700;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.success-overlay.open{display:flex}
+.success-box{background:#fff;border-radius:28px;padding:48px 40px;text-align:center;max-width:380px;width:100%;margin:20px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+.success-icon{width:80px;height:80px;background:#dff0d0;border-radius:50%;border:3px solid #4e7c28;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:36px;animation:checkPop .5s .3s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes checkPop{from{transform:scale(0)}to{transform:scale(1)}}
+.success-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:#2c1a0e;margin-bottom:8px}
+.success-msg{font-size:14px;color:#9a8070;line-height:1.6;margin-bottom:28px}
+.success-close{background:#3a5a1c;color:#fff;border:none;border-radius:14px;padding:14px 40px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Playfair Display',serif}
+
+/* ── RESERVATION SECTION ── */
+#reservation{background:linear-gradient(135deg,#2c1a0e 0%,#1e3a0a 100%);color:#fff}
+#reservation .section-title{color:#fff}
+#reservation .section-title em{color:#c8a96e}
+.res-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:700px}
+.res-label{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:7px;display:block}
+.res-input{width:100%;padding:13px 16px;border:1.5px solid rgba(255,255,255,.15);border-radius:12px;background:rgba(255,255,255,.08);color:#fff;font-size:14px;font-weight:600;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.res-input:focus{border-color:#c8a96e}
+.res-input::placeholder{color:rgba(255,255,255,.3)}
+.res-input option{background:#2c1a0e;color:#fff}
+.res-input::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.6;cursor:pointer}
+.res-full{grid-column:1/-1}
+.res-submit{background:#c8a96e;color:#2c1a0e;border:none;padding:15px 40px;border-radius:40px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Playfair Display',serif;letter-spacing:.5px;transition:all .2s;margin-top:8px}
+.res-submit:hover{background:#e0c080;transform:scale(1.03)}
+
+/* ── RES SUCCESS ── */
+.res-success{display:none;background:rgba(255,255,255,.06);border:1.5px solid rgba(200,169,110,.4);border-radius:20px;padding:32px;max-width:500px;text-align:center}
+.res-success.open{display:block}
+.res-success-icon{font-size:48px;margin-bottom:12px}
+.res-success-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:#c8a96e;margin-bottom:8px}
+.res-success-detail{font-size:13px;color:rgba(255,255,255,.6);line-height:1.8}
+.res-ref{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:#fff;margin:12px 0}
+
+/* ── FOOTER ── */
+footer{background:#2c1a0e;padding:48px;text-align:center}
+footer .brand{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#c8a96e;letter-spacing:2px;margin-bottom:6px}
+footer p{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1px}
+
+/* ── MISC ── */
+.floating-cart{position:fixed;bottom:28px;right:28px;z-index:300;background:#3a5a1c;color:#fff;border:none;border-radius:50px;padding:14px 22px;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 8px 30px rgba(58,90,28,.4);transition:all .25s;display:none}
+.floating-cart.show{display:flex}
+.floating-cart:hover{background:#4e7c28;transform:translateY(-2px)}
+.cart-badge{background:#c8a96e;color:#2c1a0e;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
+
+@media(max-width:700px){
+  nav{padding:0 20px}
+  .nav-links{gap:20px;font-size:11px}
+  section{padding:60px 20px}
+  .order-body{grid-template-columns:1fr}
+  .cart-panel{position:static}
+  .res-form{grid-template-columns:1fr}
+  .order-header{padding:16px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <div class="nav-links">
+    <a onclick="showSection('menu')">Our Menu</a>
+  </div>
+  <a class="nav-brand" onclick="showSection('home')">AYANA<span>✦</span></a>
+  <div class="nav-links">
+    <a onclick="openOrderPage()">Order Now</a>
+  </div>
+</nav>
+
+<!-- ── HOME ── -->
+<section id="home" style="padding:0">
+  <div class="hero-bg"></div>
+  <div class="hero-marquee-wrap">
+    <div class="hero-marquee">AYANA RESTO • CITA RASA NUSANTARA • AYANA RESTO • CITA RASA NUSANTARA • AYANA RESTO • CITA RASA NUSANTARA • AYANA RESTO •</div>
+    <div class="hero-marquee hero-marquee2">MASAKAN INDONESIA • AUTHENTIC FLAVOURS • MASAKAN INDONESIA • AUTHENTIC FLAVOURS • MASAKAN INDONESIA •</div>
+    <div class="hero-marquee hero-marquee3">AYANA • HERITAGE • TASTE • AYANA • HERITAGE • TASTE • AYANA • HERITAGE • TASTE • AYANA •</div>
+  </div>
+  <div class="hero-center">
+    <div class="hero-badge">🌿 Kampung Kecil Heritage</div>
+    <div class="hero-leaf">🍃</div>
+    <div class="hero-title">AYANA<br><em>Resto</em></div>
+    <div class="hero-sub">Cita Rasa Nusantara · Autentik · Istimewa</div>
+    <button class="hero-cta" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})">
+      Make a Reservation
+    </button>
+  </div>
+  <div class="hero-scroll">
+    <span></span>scroll
+  </div>
+</section>
+
+<!-- ── MENU ── -->
+<section id="menu">
+  <div class="section-label">— Pilihan Hidangan</div>
+  <div class="section-title">Menu <em>Pilihan</em> Kami</div>
+  <div class="menu-cats">
+    <button class="cat-btn active" onclick="filterMenu('all',this)">Semua</button>
+    <button class="cat-btn" onclick="filterMenu('main',this)">Main Course</button>
+    <button class="cat-btn" onclick="filterMenu('appetizer',this)">Appetizer</button>
+    <button class="cat-btn" onclick="filterMenu('drink',this)">Minuman</button>
+  </div>
+  <div class="menu-grid" id="menu-grid"></div>
+</section>
+
+<!-- ── RESERVATION ── -->
+<section id="reservation">
+  <div class="section-label">— Pesan Tempat Duduk</div>
+  <div class="section-title">Buat <em>Reservasi</em></div>
+  <!-- FORM -->
+  <div id="res-form-wrap">
+    <div class="res-form">
+      <div>
+        <span class="res-label">Jumlah Tamu</span>
+        <select id="res-guests" class="res-input">
+          <option value="">-- Pilih jumlah tamu --</option>
+          <option value="1">1 Orang</option>
+          <option value="2">2 Orang</option>
+          <option value="3">3 Orang</option>
+          <option value="4">4 Orang</option>
+          <option value="5">5 Orang</option>
+          <option value="6">6 Orang</option>
+          <option value="7">7 Orang</option>
+          <option value="8">8 Orang</option>
+          <option value="9">9 Orang</option>
+          <option value="10">10 Orang</option>
+        </select>
+      </div>
+      <div>
+        <span class="res-label">Tanggal</span>
+        <input type="date" class="res-input" id="res-date" style="width:100%">
+      </div>
+      <div>
+        <span class="res-label">Waktu</span>
+        <input type="time" class="res-input" id="res-time" min="10:00" max="22:00" value="19:00">
+      </div>
+      <div>
+        <span class="res-label">Nama Lengkap</span>
+        <input type="text" class="res-input" id="res-name" placeholder="Nama Anda">
+      </div>
+      <div>
+        <span class="res-label">Nomor Telepon</span>
+        <input type="tel" class="res-input" id="res-phone" placeholder="+62 8xx-xxxx-xxxx">
+      </div>
+      <div>
+        <span class="res-label">Email</span>
+        <input type="email" class="res-input" id="res-email" placeholder="email@contoh.com">
+      </div>
+      <div class="res-full">
+        <span class="res-label">Permintaan Khusus (opsional)</span>
+        <textarea class="res-input" id="res-special" rows="3" placeholder="Misal: meja dekat jendela, perayaan ulang tahun..."></textarea>
+      </div>
+      <div class="res-full">
+        <button class="res-submit" onclick="submitReservation()">Konfirmasi Reservasi →</button>
+      </div>
+    </div>
+  </div>
+  <!-- SUCCESS -->
+  <div class="res-success" id="res-success">
+    <div class="res-success-icon">🌿</div>
+    <div class="res-success-title">Reservasi Berhasil!</div>
+    <div class="res-ref" id="res-ref-num">#RES-0000</div>
+    <div class="res-success-detail" id="res-success-detail">Detail reservasi Anda</div>
+    <button class="res-submit" style="margin-top:20px" onclick="resetReservation()">Buat Reservasi Lain</button>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="brand">AYANA✦</div>
+  <p>Jl. Nusantara No. 1, Jakarta · (021) 555-AYANA</p>
+  <p style="margin-top:8px">© 2024 Ayana Resto. All rights reserved.</p>
+</footer>
+
+<!-- ── FLOATING CART ── -->
+<button class="floating-cart" id="floating-cart" onclick="openOrderPage()">
+  🛒 Keranjang
+  <span class="cart-badge" id="cart-count">0</span>
+</button>
+
+<!-- ── ORDER PAGE ── -->
+<div id="order-page">
+  <div class="order-header">
+    <div class="order-header-title">🛒 Order Sekarang</div>
+    <button class="close-order-btn" onclick="closeOrderPage()">← Kembali</button>
+  </div>
+  <div class="order-body">
+    <div class="order-menu-section">
+      <div class="order-section-title">🍽 Pilih Menu</div>
+      <div id="order-menu-list"></div>
+    </div>
+    <div class="cart-panel">
+      <div class="cart-title">🧺 Pesanan Anda</div>
+      <div id="cart-list"><div class="cart-empty">Belum ada item dipilih</div></div>
+      <hr class="cart-divider">
+      <div class="cart-row"><span>Subtotal</span><span id="cart-subtotal">Rp 0</span></div>
+      <div class="cart-row"><span>Pajak (10%)</span><span id="cart-tax">Rp 0</span></div>
+      <div class="cart-total-row"><span>Total</span><span id="cart-total">Rp 0</span></div>
+      <button class="confirm-btn" id="confirm-btn" onclick="openPayment()" disabled>
+        Konfirmasi Pesanan →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── PAYMENT MODAL ── -->
+<div class="modal-overlay" id="payment-modal">
+  <div class="modal-box">
+    <div class="modal-title">Proses Pembayaran</div>
+    <div class="modal-sub">Pilih metode pembayaran Anda</div>
+    <div class="order-summary-box">
+      <div id="payment-summary-items"></div>
+      <div class="sum-total"><span>Total Pembayaran</span><span id="payment-total-display">Rp 0</span></div>
+    </div>
+    <div class="pay-method-label">Metode Pembayaran</div>
+    <div class="pay-methods">
+      <div class="pay-opt" id="opt-cash" onclick="selectMethod('cash')">
+        <div class="pay-opt-icon">💵</div>
+        <div class="pay-opt-name">Cash</div>
+        <div class="pay-opt-desc">Bayar di kasir</div>
+      </div>
+      <div class="pay-opt" id="opt-qris" onclick="selectMethod('qris')">
+        <div class="pay-opt-icon">📱</div>
+        <div class="pay-opt-name">QRIS</div>
+        <div class="pay-opt-desc">Scan kode QR</div>
+      </div>
+    </div>
+    <button class="pay-btn" id="pay-btn" onclick="processPayment()" disabled>Bayar Sekarang</button>
+    <button class="cancel-pay-btn" onclick="closePayment()">Batal</button>
+  </div>
+</div>
+
+<!-- ── SUCCESS MODAL ── -->
+<div class="success-overlay" id="success-overlay">
+  <div class="success-box">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Pembayaran Berhasil!</div>
+    <div class="success-msg" id="success-msg">Pesanan Anda telah dikonfirmasi.<br>Terima kasih telah makan di Ayana Resto!</div>
+    <button class="success-close" onclick="closeSuccess()">Kembali ke Menu</button>
+  </div>
+</div>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────────────────────
+const MENU=[
+  {id:1,name:'Nasi Goreng Wagyu',cat:'main',price:45000,desc:'Nasi goreng premium dengan wagyu slice pilihan chef',img:'https://images.unsplash.com/photo-1680674814945-7945d913319c?w=400&q=80',tag:'popular',tagLabel:'Best Seller'},
+  {id:2,name:'Iga Bakar Madu',cat:'main',price:64000,desc:'Iga sapi pilihan dengan saus madu rempah rahasia',img:'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80',tag:'popular',tagLabel:'Best Seller'},
+  {id:3,name:'Ayam Bakar Kampung',cat:'main',price:28000,desc:'Ayam kampung bakar bumbu rempah tradisional turun-temurun',img:'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80'},
+  {id:4,name:'Ikan Bakar Asap',cat:'main',price:30000,desc:'Kuah santan gurih dengan daging sapi empuk dan emping',img:'https://images.unsplash.com/photo-1551014700-0ca41391f312?w=400&q=80'},
+  {id:5,name:'Nasi Uduk Komplit',cat:'main',price:28000,desc:'Nasi uduk dengan berbagai lauk dan sambal pedas',img:'https://images.unsplash.com/photo-1677921755291-c39158477b8e?w=400&q=80'},
+  {id:6,name:'Sup Ikan Tuna',cat:'main',price:33000,desc:'Sup kuah santan dengan daging ikan tuna yang segar',img:'https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&q=80',tag:'popular',tagLabel:'Best Seller'},
+  {id:7,name:'Laksa',cat:'main',price:29000,desc:'Sup Laksa dengan cita rasa rempah yang khas',img:'https://images.unsplash.com/photo-1548943487-a2e4e43b4853?w=400&q=80'},
+  {id:8,name:'Sate Ayam Bumbu Kacang',cat:'appetizer',price:34000,desc:'Sate ayam bakar dengan bumbu kacang khas Nusantara',img:'https://images.unsplash.com/photo-1529563021893-cc83c992d75d?w=400&q=80',tag:'fav',tagLabel:'Favorit'},
+  {id:9,name:'Perkedel Kentang',cat:'appetizer',price:10000,desc:'Perkedel kentang goreng gurih dengan bumbu daun bawang',img:'https://images.unsplash.com/photo-1750767397012-3413ba4fdbc7?w=400&q=80'},
+  {id:10,name:'Sup Tom Yum Udang',cat:'appetizer',price:28000,desc:'Sup asam pedas dengan udang segar & jamur enoki',img:'https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=400&q=80',tag:'spicy',tagLabel:'Pedas'},
+  {id:11,name:'Pempek Palembang',cat:'appetizer',price:20000,desc:'Pempek dengan olahan daging ikan berkualitas dan kuah cuko yang gurih',img:'https://images.unsplash.com/photo-1628591697390-ce94ea55fe12?w=400&q=80'},
+  {id:12,name:'Es Teh Manis',cat:'drink',price:8000,desc:'Teh hitam manis segar dengan es batu pilihan',img:'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80'},
+  {id:13,name:'Caramel Latte Hangat',cat:'drink',price:17000,desc:'Kopi latte dengan caramel dan sea salt premium',img:'https://images.unsplash.com/photo-1541167760496-1628856ab772?w=400&q=80',tag:'popular',tagLabel:'Favorit'},
+  {id:14,name:'Jus Alpukat Segar',cat:'drink',price:12000,desc:'Alpukat segar blended dengan susu kental manis',img:'https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&q=80'},
+  {id:15,name:'Mocktail Citrus Mint',cat:'drink',price:25000,desc:'Jeruk segar dengan daun mint & soda aromatik',img:'https://images.unsplash.com/photo-1437418747212-8d9709afab22?w=400&q=80'},
+  {id:16,name:'Es Cendol Dawet',cat:'drink',price:15000,desc:'Minuman tradisional santan dengan gula aren asli',img:'https://images.unsplash.com/photo-1499638673689-79a0b5115d87?w=400&q=80'},
+];
+
+const cart={};
+let selectedMethod=null;
+
+const fmt=n=>'Rp '+n.toLocaleString('id-ID');
+
+function showSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+// ─── BUILD MENU GRID ──────────────────────────────────────────────────────
+function buildMenuGrid(filter='all'){
+  const grid=document.getElementById('menu-grid');
+  const items=filter==='all'?MENU:MENU.filter(m=>m.cat===filter);
+  grid.innerHTML='';
+  items.forEach(item=>{
+    const tagHtml=item.tag?`<span class="menu-card-tag tag-${item.tag}">${item.tag==='fav'?'❤️ ':item.tag==='spicy'?'🌶️ ':item.tag==='popular'?'⭐ ':''}${item.tagLabel}</span>`:'';
+    const div=document.createElement('div');
+    div.className='menu-card';
+    div.innerHTML=`
+      <div class="menu-card-img">
+        <img src="${item.img}" alt="${item.name}" onerror="this.style.display='none';this.parentNode.style.background='#2d4815'">
+        <div class="menu-card-img-overlay"></div>
+      </div>
+      <div class="menu-card-body">
+        ${tagHtml}
+        <div class="menu-card-name">${item.name}</div>
+        <div class="menu-card-desc">${item.desc}</div>
+        <div class="menu-card-price">${fmt(item.price)}</div>
+      </div>`;
+    grid.appendChild(div);
+  });
+}
+
+function filterMenu(cat,btn){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  buildMenuGrid(cat);
+}
+
+// ─── CART LOGIC ───────────────────────────────────────────────────────────
+function addToCart(id){
+  cart[id]=(cart[id]||0)+1;
+  updateCart();
+}
+function removeFromCart(id){
+  if(cart[id]>1)cart[id]--;
+  else delete cart[id];
+  updateCart();
+}
+function deleteFromCart(id){
+  delete cart[id];
+  updateCart();
+}
+
+function updateCart(){
+  const total=Object.keys(cart).reduce((s,id)=>s+(cart[id]||0),0);
+  const badge=document.getElementById('cart-count');
+  const fc=document.getElementById('floating-cart');
+  badge.textContent=total;
+  fc.classList.toggle('show',total>0);
+  renderCartPanel();
+}
+
+function renderCartPanel(){
+  const list=document.getElementById('cart-list');
+  const ids=Object.keys(cart);
+  if(ids.length===0){
+    list.innerHTML='<div class="cart-empty">Belum ada item dipilih</div>';
+    document.getElementById('cart-subtotal').textContent=fmt(0);
+    document.getElementById('cart-tax').textContent=fmt(0);
+    document.getElementById('cart-total').textContent=fmt(0);
+    document.getElementById('confirm-btn').disabled=true;
+    return;
+  }
+  let html='';
+  let sub=0;
+  ids.forEach(id=>{
+    const item=MENU.find(m=>m.id==id);
+    if(!item)return;
+    const rowTotal=item.price*cart[id];
+    sub+=rowTotal;
+    html+=`<div class="cart-item">
+      <span class="cart-item-name">${item.name}</span>
+      <span class="cart-item-qty">x${cart[id]}</span>
+      <span class="cart-item-price">${fmt(rowTotal)}</span>
+      <button class="cart-item-del" onclick="deleteFromCart(${id})" title="Hapus">×</button>
+    </div>`;
+  });
+  list.innerHTML=html;
+  const tax=Math.round(sub*.1);
+  const total=sub+tax;
+  document.getElementById('cart-subtotal').textContent=fmt(sub);
+  document.getElementById('cart-tax').textContent=fmt(tax);
+  document.getElementById('cart-total').textContent=fmt(total);
+  document.getElementById('confirm-btn').disabled=false;
+}
+
+// ─── ORDER MENU LIST ──────────────────────────────────────────────────────
+function buildOrderMenuList(){
+  const el=document.getElementById('order-menu-list');
+  const cats={main:'🍽 Main Course',appetizer:'🥗 Appetizer',drink:'🥤 Minuman'};
+  let html='';
+  Object.entries(cats).forEach(([cat,label])=>{
+    const items=MENU.filter(m=>m.cat===cat);
+    html+=`<div style="margin-bottom:24px"><div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:#2c1a0e;margin-bottom:8px;padding:8px 14px;background:#eef6e4;border-radius:10px;border-left:4px solid #3a5a1c">${label}</div>`;
+    items.forEach(item=>{
+      html+=`<div class="order-item-row">
+        <div class="order-item-emoji" style="overflow:hidden;padding:0">
+          <img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px" onerror="this.parentNode.style.background='#2d4815';this.style.display='none'">
+        </div>
+        <div class="order-item-info">
+          <div class="order-item-name">${item.name}</div>
+          <div class="order-item-price">${fmt(item.price)}</div>
+        </div>
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="removeFromCart(${item.id})">−</button>
+          <span class="qty-num" id="qty-${item.id}">${cart[item.id]||0}</span>
+          <button class="qty-btn" onclick="addToCart(${item.id})">+</button>
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+
+// ─── ORDER PAGE ───────────────────────────────────────────────────────────
+function openOrderPage(){
+  document.getElementById('order-page').classList.add('open');
+  document.body.style.overflow='hidden';
+  buildOrderMenuList();
+  renderCartPanel();
+}
+function closeOrderPage(){
+  document.getElementById('order-page').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ─── PAYMENT ─────────────────────────────────────────────────────────────
+function openPayment(){
+  const ids=Object.keys(cart);
+  let html='';
+  let sub=0;
+  ids.forEach(id=>{
+    const item=MENU.find(m=>m.id==id);
+    if(!item)return;
+    const rt=item.price*cart[id];
+    sub+=rt;
+    html+=`<div class="sum-row"><span>${item.name} ×${cart[id]}</span><span>${fmt(rt)}</span></div>`;
+  });
+  const tax=Math.round(sub*.1);
+  const total=sub+tax;
+  html+=`<div class="sum-row"><span>Pajak (10%)</span><span>${fmt(tax)}</span></div>`;
+  document.getElementById('payment-summary-items').innerHTML=html;
+  document.getElementById('payment-total-display').textContent=fmt(total);
+  selectedMethod=null;
+  document.querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('selected'));
+  document.getElementById('pay-btn').disabled=true;
+  document.getElementById('payment-modal').classList.add('open');
+}
+function closePayment(){
+  document.getElementById('payment-modal').classList.remove('open');
+}
+function selectMethod(m){
+  selectedMethod=m;
+  document.querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('selected'));
+  document.getElementById('opt-'+m).classList.add('selected');
+  document.getElementById('pay-btn').disabled=false;
+}
+function processPayment(){
+  closePayment();
+  const methodName=selectedMethod==='cash'?'Cash':'QRIS';
+  const totalText=document.getElementById('payment-total-display').textContent;
+  document.getElementById('success-msg').innerHTML=`Pesanan Anda telah dikonfirmasi.<br><strong>${totalText}</strong> dibayar via <strong>${methodName}</strong>.<br><br>Terima kasih telah makan di <strong>Ayana Resto</strong>! 🌿`;
+  document.getElementById('success-overlay').classList.add('open');
+  Object.keys(cart).forEach(k=>delete cart[k]);
+  updateCart();
+  closeOrderPage();
+}
+function closeSuccess(){
+  document.getElementById('success-overlay').classList.remove('open');
+}
+
+// ─── RESERVATION ─────────────────────────────────────────────────────────
+document.getElementById('res-date').min=new Date().toISOString().split('T')[0];
+
+function submitReservation(){
+  const guests=document.getElementById('res-guests').value;
+  const date=document.getElementById('res-date').value;
+  const time=document.getElementById('res-time').value;
+  const name=document.getElementById('res-name').value.trim();
+  const phone=document.getElementById('res-phone').value.trim();
+  const email=document.getElementById('res-email').value.trim();
+  const special=document.getElementById('res-special').value.trim();
+  if(!guests||!date||!time||!name||!phone||!email){
+    alert('Mohon lengkapi semua data yang diperlukan.');return;
+  }
+  // Format time to HH:MM
+  const timeFmt=time.length===5?time:time.substring(0,5);
+  const ref='#RES-'+Math.floor(9000+Math.random()*1000);
+  document.getElementById('res-ref-num').textContent=ref;
+  document.getElementById('res-success-detail').innerHTML=
+    `👤 ${name} &nbsp;|&nbsp; 👥 ${guests}<br>📅 ${date} &nbsp;|&nbsp; ⏰ ${timeFmt} WIB`+
+    (phone?`<br>📞 ${phone}`:'')+(email?`<br>📧 ${email}`:'')+(special?`<br>💬 ${special}`:'');
+  document.getElementById('res-form-wrap').style.display='none';
+  const suc=document.getElementById('res-success');
+  suc.classList.add('open');
+  suc.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function resetReservation(){
+  document.getElementById('res-form-wrap').style.display='block';
+  document.getElementById('res-success').classList.remove('open');
+  document.getElementById('res-guests').value='';
+  document.getElementById('res-name').value='';
+  document.getElementById('res-phone').value='';
+  document.getElementById('res-email').value='';
+  document.getElementById('res-special').value='';
+  document.getElementById('res-date').value='';
+  document.getElementById('res-time').value='19:00';
+}
+
+// ─── ORDER ITEM QTY SYNC ──────────────────────────────────────────────────
+const _addToCart=addToCart;
+addToCart=function(id){_addToCart(id);const el=document.getElementById('qty-'+id);if(el)el.textContent=cart[id]||0;};
+const _removeFromCart=removeFromCart;
+removeFromCart=function(id){_removeFromCart(id);const el=document.getElementById('qty-'+id);if(el)el.textContent=cart[id]||0;};
+
+// ─── INIT ─────────────────────────────────────────────────────────────────
+buildMenuGrid('all');
+</script>
+</body>
+</html>
