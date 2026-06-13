@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayana Resto</title>
+<title>Nusantara Resto</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -189,7 +189,7 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1px}
   <div class="nav-links">
     <a onclick="showSection('menu')">Our Menu</a>
   </div>
-  <a class="nav-brand" onclick="showSection('home')">AYANA<span>✦</span></a>
+  <a class="nav-brand" onclick="showSection('home')">NUSANTARA<span></span></a>
   <div class="nav-links">
     <a onclick="openOrderPage()">Order Now</a>
   </div>
@@ -199,13 +199,12 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1px}
 <section id="home" style="padding:0">
   <div class="hero-bg"></div>
   <div class="hero-marquee-wrap">
-    <div class="hero-marquee">AYANA RESTO • CITA RASA NUSANTARA • AYANA RESTO • CITA RASA NUSANTARA • AYANA RESTO • CITA RASA NUSANTARA • AYANA RESTO •</div>
+    <div class="hero-marquee">NUSANTARA RESTO • CITA RASA INDONESIA • NUSANTARA RESTO • CITA RASA INDONESIA • NUSANTARA RESTO • CITA RASA INDONESIA • NUSANTARA RESTO •</div>
     <div class="hero-marquee hero-marquee2">MASAKAN INDONESIA • AUTHENTIC FLAVOURS • MASAKAN INDONESIA • AUTHENTIC FLAVOURS • MASAKAN INDONESIA •</div>
-    <div class="hero-marquee hero-marquee3">AYANA • HERITAGE • TASTE • AYANA • HERITAGE • TASTE • AYANA • HERITAGE • TASTE • AYANA •</div>
+    <div class="hero-marquee hero-marquee3">NUSANTARA • HERITAGE • TASTE • NUSANTARA • HERITAGE • TASTE • NUSANTARA • HERITAGE • TASTE • NUSANTARA •</div>
   </div>
   <div class="hero-center">
-    <div class="hero-leaf">🍃</div>
-    <div class="hero-title">AYANA<br><em>Resto</em></div>
+    <div class="hero-title">NUSANTARA<br><em>Resto</em></div>
     <div class="hero-sub">Cita Rasa Nusantara · Autentik · Istimewa</div>
     <button class="hero-cta" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})">
       Make a Reservation
@@ -293,9 +292,9 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1px}
 
 <!-- ── FOOTER ── -->
 <footer>
-  <div class="brand">AYANA✦</div>
-  <p>Jl. Nusantara No. 1, Jakarta · (021) 555-AYANA</p>
-  <p style="margin-top:8px">© 2024 Ayana Resto. All rights reserved.</p>
+  <div class="brand">NUSANTARA</div>
+  <p>Jl. Senopati No. 1, Jakarta · (021) 555-NUSANTARA</p>
+  <p style="margin-top:8px">© 2028 Nusantara Resto. All rights reserved.</p>
 </footer>
 
 <!-- ── FLOATING CART ── -->
@@ -361,7 +360,7 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1px}
   <div class="success-box">
     <div class="success-icon">✓</div>
     <div class="success-title">Pembayaran Berhasil!</div>
-    <div class="success-msg" id="success-msg">Pesanan Anda telah dikonfirmasi.<br>Terima kasih telah makan di Ayana Resto!</div>
+    <div class="success-msg" id="success-msg">Pesanan Anda telah dikonfirmasi.<br>Terima kasih telah makan di Nusantara Resto!</div>
     <button class="success-close" onclick="closeSuccess()">Kembali ke Menu</button>
   </div>
 </div>
@@ -560,7 +559,7 @@ function processPayment(){
   closePayment();
   const methodName=selectedMethod==='cash'?'Cash':'QRIS';
   const totalText=document.getElementById('payment-total-display').textContent;
-  document.getElementById('success-msg').innerHTML=`Pesanan Anda telah dikonfirmasi.<br><strong>${totalText}</strong> dibayar via <strong>${methodName}</strong>.<br><br>Terima kasih telah makan di <strong>Ayana Resto</strong>! 🌿`;
+  document.getElementById('success-msg').innerHTML=`Pesanan Anda telah dikonfirmasi.<br><strong>${totalText}</strong> dibayar via <strong>${methodName}</strong>.<br><br>Terima kasih telah makan di <strong>Nusantara Resto</strong>! 🌿`;
   document.getElementById('success-overlay').classList.add('open');
   Object.keys(cart).forEach(k=>delete cart[k]);
   updateCart();
